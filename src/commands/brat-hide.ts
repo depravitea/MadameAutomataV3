@@ -1,0 +1,1 @@
+import { SlashCommandBuilder } from 'discord.js'; import { addXP } from '../lib/economy.js'; export const data=new SlashCommandBuilder().setName('brat-hide').setDescription('Hide from a Dom temporarily'); export async function execute(i){ await addXP(i.guildId!,i.user.id,1); await i.reply({ content:`${i.user} vanishes behind velvet curtains (briefly).`}); }

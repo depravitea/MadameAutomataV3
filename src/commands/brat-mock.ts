@@ -1,0 +1,1 @@
+import { SlashCommandBuilder } from 'discord.js'; import { addXP } from '../lib/economy.js'; export const data=new SlashCommandBuilder().setName('brat-mock').setDescription('Mock a Dom (safely)'); export async function execute(i){ await addXP(i.guildId!,i.user.id,1); await i.reply({ content:`${i.user} smirks. The hall gasps.`}); }

@@ -1,0 +1,1 @@
+import { SlashCommandBuilder } from 'discord.js'; export const data=new SlashCommandBuilder().setName('jail-beg').setDescription('Beg for release from jail'); export async function execute(i){ await i.reply({ content:`${i.user} begs prettily for release. A mod may take pity.`}); }

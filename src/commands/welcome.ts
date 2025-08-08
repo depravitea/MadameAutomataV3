@@ -1,0 +1,1 @@
+import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js'; export const data=new SlashCommandBuilder().setName('welcome').setDescription('Set a welcome message (stub)').setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild); export async function execute(i){ await i.reply({ content:'Welcome message set. Customize in DB.', ephemeral:true});}

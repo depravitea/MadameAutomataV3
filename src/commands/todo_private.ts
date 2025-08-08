@@ -1,0 +1,1 @@
+import { SlashCommandBuilder } from 'discord.js'; export const data=new SlashCommandBuilder().setName('todo_private').setDescription('Hint: use /log with private:true for private notes'); export async function execute(i){ await i.reply({ content:'Use /log to store private notes (set private true).', ephemeral:true}); }

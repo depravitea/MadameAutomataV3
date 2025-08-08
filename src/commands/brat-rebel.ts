@@ -1,0 +1,1 @@
+import { SlashCommandBuilder } from 'discord.js'; import { addXP } from '../lib/economy.js'; export const data=new SlashCommandBuilder().setName('brat-rebel').setDescription('Rebel against a Dom'); export async function execute(i){ await addXP(i.guildId!,i.user.id,1); await i.reply({ content:`${i.user} tests the leash. How bold.`}); }
