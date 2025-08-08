@@ -1,5 +1,11 @@
-generator client { provider = "prisma-client-js" }
-datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
 
 model Guild {
   id            String   @id
@@ -24,6 +30,7 @@ model Guild {
   riddles       Riddle[]
   logentries    LogEntry[]
   quizzes       QuizResult[]
+
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
@@ -60,11 +67,12 @@ model Punishment {
   id        String   @id @default(cuid())
   guildId   String
   targetId  String
-  kind      String
+  kind      String   // timeout, blindfold, mark, custom, strike, censor, etc.
   reason    String?
   expiresAt DateTime?
   createdBy String
   createdAt DateTime @default(now())
+
   guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
@@ -77,6 +85,7 @@ model Task {
   dueAt     DateTime?
   doneAt    DateTime?
   createdAt DateTime @default(now())
+
   guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
@@ -87,6 +96,7 @@ model Reminder {
   content   String
   runAt     DateTime
   createdAt DateTime @default(now())
+
   guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
@@ -98,6 +108,7 @@ model Contract {
   terms     String
   status    String   // pending, active, revoked
   createdAt DateTime @default(now())
+
   guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
@@ -107,6 +118,7 @@ model Consent {
   userId    String
   limits    String
   createdAt DateTime @default(now())
+
   guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
@@ -120,7 +132,8 @@ model Profile {
   bratScore Int     @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
 model FeatureFlag {
@@ -128,7 +141,9 @@ model FeatureFlag {
   guildId String
   key     String
   enabled Boolean @default(false)
-  Guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
   @@unique([guildId, key])
 }
 
@@ -139,7 +154,8 @@ model Jail {
   locked    Boolean  @default(true)
   reason    String?
   createdAt DateTime @default(now())
-  Guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
 model EconomyTx {
@@ -150,7 +166,8 @@ model EconomyTx {
   amount    Int
   meta      String?
   createdAt DateTime @default(now())
-  Guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
 model Riddle {
@@ -162,7 +179,8 @@ model Riddle {
   hint      String?
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
-  Guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
 model LogEntry {
@@ -172,7 +190,8 @@ model LogEntry {
   content   String
   private   Boolean  @default(false)
   createdAt DateTime @default(now())
-  Guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
 
 model QuizResult {
@@ -181,5 +200,6 @@ model QuizResult {
   userId    String
   result    String
   createdAt DateTime @default(now())
-  Guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
 }
